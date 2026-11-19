@@ -23,8 +23,8 @@ for (const q of quizzes) {
     VALUES (${[q.key,q.spot_id,q.prompt,JSON.stringify(q.choices),q.answer_index,q.sort_order,1,q.source_url,q.source_title,q.evidence_level].map(quote).join(",")})
     ON CONFLICT(external_key) DO UPDATE SET spot_id=excluded.spot_id,prompt=excluded.prompt,choices_json=excluded.choices_json,answer_index=excluded.answer_index,sort_order=excluded.sort_order,active=1,source_url=excluded.source_url,source_title=excluded.source_title,evidence_level=excluded.evidence_level;`);
 }
-const file = join(tmpdir(), `minyo-go-seed-${Date.now()}.sql`);
+const file = join(tmpdir(), `bon-go-seed-${Date.now()}.sql`);
 await writeFile(file, sql.join("\n"));
-const args = ["d1","execute","minyo-go",...(remote?["--remote"]:["--local"]),"--file",file];
+const args = ["d1","execute","bon-go",...(remote?["--remote"]:["--local"]),"--file",file];
 execFileSync("npx",["wrangler",...args],{stdio:"inherit"});
 console.log(`Seed submitted: ${spots.length} spots, ${quizzes.length} questions (${remote?"remote":"local"} D1)`);
