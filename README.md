@@ -23,6 +23,8 @@ This repository is the independent TypeScript/Cloudflare deployment of the stamp
 
 A stamp is awarded only when all three active questions are answered correctly. Field check-in requires coordinates within 30 km of a verified spot. Test mode is disabled by default.
 
+The map UI is served at `/map.html?api=1` to enable the Workers API mode.
+
 ## Local development
 
 ```sh
